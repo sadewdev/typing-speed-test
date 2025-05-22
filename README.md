@@ -18,7 +18,7 @@
   Built with modern UI/UX in mind, using Tailwind CSS, Lottie animations, and IndexedDB for a smooth, rewarding typing experience.
 </div>
 
----
+<br>
 
 ## ✨ Features
 
@@ -30,19 +30,13 @@
 * 🌐 Responsive design for all devices
 * 🚫 No backend required — fully frontend and offline
 
----
-
-## 📸 Screenshots
-
-> Coming soon...
-
----
+<br>
 
 ## 🚀 Demo
 
 Live demo: [https://sadewdev.github.io/typing-speed-test](https://sadewdev.github.io/typing-speed-test)
 
----
+<br>
 
 ## 🛠️ Tech Stack
 
@@ -51,7 +45,7 @@ Live demo: [https://sadewdev.github.io/typing-speed-test](https://sadewdev.githu
 * **Storage:** IndexedDB (client-side point storage)
 * **Deployment:** GitHub Pages
 
----
+<br>
 
 ## 🧑‍💻 Getting Started
 
@@ -77,7 +71,7 @@ open index.html
 
 Or use a local server (e.g., VS Code Live Server, Python HTTP Server).
 
----
+<br>
 
 ## 📁 Project Structure
 
@@ -91,7 +85,7 @@ typing-speed-test/
 └── README.md           # Project documentation
 ```
 
----
+<br>
 
 ## 💡 Meta Tags & Favicon
 
@@ -105,22 +99,22 @@ Include this in your `<head>`:
 <meta name="theme-color" content="#3b82f6">
 ```
 
----
+<br>
 
 ## 📬 Contact
 
 If you enjoyed this project or have feedback:
 
 * GitHub: [@sadewdev](https://github.com/sadewdev)
-* Email: [sadewdev@example.com](mailto:sadewdev@example.com)
+* Email: [sadewdev@gmail.com](mailto:sadewdev@gmail.com)
 
----
+<br>
 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
----
+<br>
 
 ## 🌟 Support
 

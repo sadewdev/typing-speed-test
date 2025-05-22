@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typing Speed Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/tgs-player.js"></script>
+  <link rel="icon" type="image/png" href="./assets/favicon/favicon.ico" />
+
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Test your typing speed with this interactive typing test web app. Earn points and boost your skills!" />
+  <meta name="keywords" content="typing test, typing speed, WPM, typing accuracy, web app" />
+  <meta name="author" content="Zohox Developers" />
+  
+  <!-- Social Media Preview (Open Graph) -->
+  <meta property="og:title" content="Typing Speed Test Web App" />
+  <meta property="og:description" content="Measure your typing speed, accuracy, and earn points!" />
+  <meta property="og:image" content="https://example.com/preview-image.png" />
+  <meta property="og:url" content="https://example.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.4s ease-out;
+    }
+    .glass {
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    #loadingScreen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-500 to-purple-600 min-h-screen flex items-center justify-center px-4 relative">
+
+    <!-- Loading Screen -->
+<div id="loadingScreen" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+  <img src="./assets/img/logo.png" alt="Loading..." class="w-80 h-80 animate-bounce" />
+</div>
+
+  <!-- Points Display -->
+  <div class="absolute top-6 right-6 text-white cursor-pointer" onclick="showPointPopup()">
+    🪙 Points: <span id="pointsDisplay">0</span>
+  </div>
+
+  <!-- Main Card -->
+  <div class="bg-white shadow-2xl rounded-3xl p-8 max-w-2xl w-full animate-fade-in">
+
+    <!-- Header -->
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <tgs-player src="./assets/tgs/keyboard-animation.tgs" autoplay loop style="width: 48px; height: 48px;"></tgs-player>
+      <h1 class="text-3xl font-bold text-blue-600">Typing Speed Test</h1>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="relative h-2 w-full bg-gray-200 rounded-full mb-4 overflow-hidden">
+      <div id="progressBar" class="absolute left-0 top-0 h-full bg-green-400 transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Quote Display -->
+    <div id="quoteDisplay" class="text-gray-700 text-lg mb-4 font-mono leading-relaxed transition-all duration-300">
+      Loading quote...
+    </div>
+
+    <!-- Input -->
+    <textarea
+      id="quoteInput"
+      placeholder="Start typing here..."
+      class="w-full h-32 p-4 border-2 border-blue-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 transition duration-300 text-gray-800 font-mono text-lg resize-none"
+      oninput="startTyping()"
+    ></textarea>
+
+    <!-- Stats -->
+    <div class="mt-6 flex justify-between text-sm text-gray-600">
+      <div>⏱ Time: <span id="timer">0</span>s</div>
+      <div>📈 WPM: <span id="wpm">0</span></div>
+      <div>✅ Accuracy: <span id="accuracy">100</span>%</div>
+    </div>
+
+    <!-- Restart Button -->
+    <div class="mt-6 text-center">
+      <button onclick="restartTest()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition">
+        Restart
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div id="resultModal" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden z-50">
+    <div class="glass rounded-3xl p-6 max-w-md w-full shadow-xl text-white text-center backdrop-blur">
+      <tgs-player src="./assets/tgs/win.tgs" autoplay loop style="width: 160px; height: 160px; margin: auto;"></tgs-player>
+      <h2 class="text-2xl font-bold mb-2 mt-2">🎉 Great Job!</h2>
+      <p class="text-lg">Your results:</p>
+      <div class="mt-4 text-md">
+        ⏱ Time: <span id="modalTime">0</span>s<br />
+        📈 WPM: <span id="modalWpm">0</span><br />
+        ✅ Accuracy: <span id="modalAccuracy">100</span>%<br />
+        🪙 Points Earned: <span id="modalPoints">0</span>
+      </div>
+      <button onclick="closeModal()" class="mt-6 bg-white text-blue-600 font-semibold px-4 py-2 rounded-full hover:bg-blue-100 transition">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Points Info Popup -->
+  <div id="pointPopup" class="fixed inset-0 bg-black/70 flex items-center justify-center hidden z-50">
+    <div class="glass rounded-3xl p-6 max-w-md w-full shadow-xl text-white text-center backdrop-blur">
+      <tgs-player src="./assets/tgs/soon.tgs" autoplay loop style="width: 140px; height: 140px; margin: auto;"></tgs-player>
+      <h2 class="text-2xl font-bold mb-2 mt-2">Coming Soon!</h2>
+      <p class="text-lg mt-2">
+        Now you can earn points and after you can withdraw with your mastery skill 💸
+      </p>
+      <button onclick="closePointPopup()" class="mt-6 bg-white text-blue-600 font-semibold px-4 py-2 rounded-full hover:bg-blue-100 transition">
+        Got it
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
